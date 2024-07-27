@@ -91,6 +91,14 @@ module.exports = ({ app, connection }) => {
     app.post('/add_movie_playlist/:playlist_id/:video_id', async (req, res) => {
         const { playlist_id, video_id } = req.params;
         try {
+
+            let doublon = await connection.query(
+                'SELECT * FROM `playlist_video` WHERE `playlist_id` = ? AND `video_id` = ?', [playlist_id, video_id]);
+
+            if (doublon != null) {
+                return res.status(400).json({ error: 'Cette vidéo est déjà dans cette playlist' });
+            }
+
             const [results] = await connection.query('INSERT INTO `playlist_video` (`playlist_id`, `video_id`) VALUES (?, ?)', [playlist_id, video_id]);
             if (results.affectedRows === 0) {
                 return res.status(404).json({ error: 'Film ou série non trouvé' });
