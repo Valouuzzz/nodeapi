@@ -1,0 +1,14 @@
+{
+  "webApi": {
+    "port": 5080
+  },
+  "mysql": {
+    "host": "127.0.0.1",
+    "user": "root",
+    "port": "3306",
+    "password": "",
+    "database": "nodeApi"
+  },
+  "sessionSecret": "jxuFMDNEtpAGhIx6uSY9lpdkTCfsoPdP",
+  "jwtSecret": "unjetondequalité"
+}
